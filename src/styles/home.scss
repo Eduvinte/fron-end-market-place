@@ -1,0 +1,49 @@
+.banner {
+    background-image: url('../images/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.textBanner {
+    background-color: rgba(0, 0, 0, 0.301);
+    color: white;
+    padding: 5%;
+}
+
+.titleContent h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    font-family: sans-serif;
+    margin-top: 2%;
+}
+
+.titleContent {
+    margin-bottom: 5%;
+}
+
+.containerFloresHome {
+    margin-top: 5%;
+}
+
+.fotoFloresHome {
+    background-image: url('../images/pngwing\ 1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 250px;
+}
+
+.container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

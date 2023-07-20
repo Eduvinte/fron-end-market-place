@@ -1,0 +1,26 @@
+.footer {
+    background-color: black;
+    padding: 5%;
+    margin-top: 5%;
+}
+
+.rowFooter {
+    display: flex;
+}
+
+.contactaFooter span{
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.contactaFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+
+.contactaFooter input{
+    width: 50%;
+}

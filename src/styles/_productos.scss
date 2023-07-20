@@ -1,0 +1,62 @@
+.market {
+    text-align: center;
+    margin: 5%;
+}
+
+.spanStyle{
+   font-size: 40px;
+   font-family: sans-serif;
+   color: black;
+   font-weight: bold;
+}
+
+.categorias {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    padding: 20px;
+}
+
+.categorias span{
+    font-size: 20px;
+    font-family: sans-serif;
+    color: black;
+    font-weight: bold;
+ }
+
+ .categorias select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+ }
+
+ .categoriaFiFilter {
+    margin-top: 5%;
+ }
+
+ .priceFilter {
+    margin-top: 5%;
+ }
+
+ .containerProductos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: end;
+ }
+
+ .product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .imgProducto {
+    background-image: url('../images/pngwing\ 1.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 250px;
+ }

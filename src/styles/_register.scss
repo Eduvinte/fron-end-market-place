@@ -1,0 +1,22 @@
+.containerRegister {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.rowRegister {
+    width: 55%;
+    height: 60vh;
+}
+
+.columnRegister {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(0, 128, 0, 0.616);
+    height: 60vh;
+    padding: 5%;
+}

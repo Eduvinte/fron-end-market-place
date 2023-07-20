@@ -1,0 +1,16 @@
+.detailsProduct {
+    display: flex;
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    flex-direction: row;
+}
+
+.containerDetailsProduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
