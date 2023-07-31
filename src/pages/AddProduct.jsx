@@ -5,76 +5,131 @@ import Row from 'react-bootstrap/esm/Row'
 import { ButtonComponent } from '../components/Button';
 import { InputEmail } from '../components/Input';
 import { ProductContextApp } from '../contexts/ProductsContextApp'
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import axios from 'axios';
 
+
+import { AuthContextApp } from '../contexts/AuthContextApp';
+
+
+
 function AddProduct() {
+  const navigate = useNavigate()
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [phone, setPhone] = useState('')
+  const [price, setPrice] = useState('')
+  const [photo, setPhoto] = useState('')
+  const [category, setCategory] = useState('Rosas')
 
-    const [nameProduct, setNameProduct] = useState()
-    const [descripcionProduct, setDescripcionProduct] = useState()
-    const [telefonoProduct, setTelefonoProduct] = useState()
-    const [valorProduct, setValorProduct] = useState()
 
-    const { addProduct } = useContext(ProductContextApp)
+  const { idUser, token, setProductAdd } = useContext(AuthContextApp)
 
-    function handleAddProduct(e){
-        e.preventDefault();
-        axios
-        .post('/addProduct', {})
-        .then((response) => {
-            // Passar la info del producto al estado global
-        })
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setPhoto(file);
+  };
+
+  async function handleAddProduct(e) {
+    e.preventDefault();
+
+    if (idUser && token) {
+
+      try {
+
+        const formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('phone', phone);
+        formData.append('price', price);
+        formData.append('photo', photo); // 'photo' should match the key used in the backend
+        formData.append('idUser', idUser);
+        formData.append('category', category);
+
+        const headers = {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`  
+
+        }
+
+      await axios.post(`http://localhost:3002/addProduct/${idUser}`, formData, { headers })
+        if(idUser){
+          navigate(`/profile/${idUser}`)
+          setProductAdd(true)
+        }
+        alert('Producto registrado con éxito')
+      } catch (error) {
+        console.error('Error al agregar producto:', error)
+        alert('Ocurrió algún error')
+      }
+
     }
+
+
+  }
 
   return (
     <div>
-        <>
+      <>
         <Row>
-        <Col className='market'>
-          <span className='spanStyle'>Publicar producto</span>
-        </Col>
-      </Row>
-    <Container className='containerRegister'>
-  
-      <Row className='rowRegister'>
-      <form onSubmit={handleAddProduct}>
-        <Col className='columnRegister'>
-  
-          <InputEmail
-            placeholder='Insira su name'
-            value={nameProduct}
-            type= 'texto'   
-            onChange={(e) => setNameProduct(e.target.value)}
-          />
-          <InputEmail
-            placeholder='Insira una descripción'
-            valor={descripcionProduct}
-            type= 'texto'   
-          />
-          <InputEmail
-            placeholder='Insira su telefono'
-            valor={telefonoProduct}
-            type= 'texto'   
-          />
-          <InputEmail
-            placeholder='Insira el valor'
-            valor={valorProduct}
-            type= 'texto'   
-          />
-          <InputEmail
-            placeholder='Insira una foto'
-            type= 'texto'   
-          />
-          <ButtonComponent
-            value={'Publicar producto'}
-          />
-        </Col>
-          </form>      
-      </Row>
-    </Container>
-        </>
+          <Col className='market'>
+            <span className='spanStyle'>Publicar producto</span>
+          </Col>
+        </Row>
+        <Container className='containerRegister'>
 
-  </div>
+          <Row className='rowRegister'>
+            <form onSubmit={handleAddProduct} encType="multipart/form-data">
+              <Col className='columnRegister'>
+
+                <InputEmail
+                  placeholder='Digite el titulo'
+                  value={name}
+                  type='texto'
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <InputEmail
+                  placeholder='Digite una descripción'
+                  valor={description}
+                  type='texto'
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <InputEmail
+                  placeholder='Digite su telefono'
+                  valor={phone}
+                  type='texto'
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <InputEmail
+                  placeholder='Digite el valor'
+                  valor={price}
+                  type='texto'
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                />
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                  <option value="Rosas">Rosas</option>
+                  <option value="Tulipanes">Tulipanes</option>
+                  <option value="Rayos de sol">Rayos de sol</option>
+                  <option value="Cravos">Cravos</option>
+                </select>
+                <ButtonComponent
+                  className={'addProductBtn'}
+                  value={'Publicar producto'}
+                />
+              </Col>
+            </form>
+          </Row>
+        </Container>
+      </>
+
+    </div>
   )
 }
 

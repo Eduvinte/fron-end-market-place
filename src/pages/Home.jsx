@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BsFillHeartFill } from "react-icons/bs";
+import { ButtonFavorit } from '../components/Button';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Home() {
 
-  axios
-    .get('/productos')
-    .then((response) => {
+  const [ products, setProducts ] = useState([])
 
+  useEffect(() => {
+    axios
+    .get('http://localhost:3002/showProducts')
+    .then((response) => {
+      setProducts(response.data)
     })
+    
     .catch((error) => {
       console.log(error)
     })
+  }, [])
+
 
   return (
     <>
@@ -36,25 +44,19 @@ function Home() {
       <div className='titleContent'>
         <h2>Más vendidos</h2>
         <Container className='containerFloresHome'>
-          <Row>
-            <Col className='container1'>
-              <div className='fotoFloresHome'></div>
-              <BsFillHeartFill style={{ fontSize: '24px', marginBottom: '25px'}}/> 
-              <h3>Tulipanes Rosas</h3>
-              <p>Descripción corta sobre esta flor o planta</p>
-            </Col>
-            <Col className='container1'>
-              <div className='fotoFloresHome'></div>
-              <BsFillHeartFill style={{ fontSize: '24px', marginBottom: '25px'}}/> 
-              <h3>Tulipanes Rosas</h3>
-              <p>Descripción corta sobre esta flor o planta</p>
-            </Col>
-            <Col className='container1'>
-              <div className='fotoFloresHome'></div>
-              <BsFillHeartFill style={{ fontSize: '24px', marginBottom: '25px'}}/> 
-              <h3>Tulipanes Rosas</h3>
-              <p>Descripción corta sobre esta flor o planta</p>
-            </Col>
+          <Row> 
+            {
+              products.map((products_home) => (
+                <Col className='container1' key={products_home.id} xs={6} sm={6} md={3}>
+                <img src={`http://localhost:3002/${products_home.photo}`} alt={products_home.name} width={140} height={200}  />
+                <ButtonFavorit product={products_home} />
+                <h3>{products_home.name}</h3>
+                <p>{products_home.description}</p>
+                <Link to={`/details/${products_home.id}`} className='addProductBtn'>Ver producto</Link>
+              </Col>
+            ))
+            }
+          
           </Row>
         </Container>
       </div>

@@ -1,20 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import picture from '../images/pngwing 1.png'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContextApp } from '../contexts/AuthContextApp';
+import {deleteProduct} from '../functions/functionsProducts';
+
 function ProfileUser() {
 
-    axios
-      .get('/profile/idUser=')
-      .then((response) => {
-        
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+
+
+  const { idUser, setProductAdd, productAdd } = useContext(AuthContextApp)
+
+  const [products, setPorducts] = useState([])
+
+
+  useEffect(()=>{
+
+    if (idUser) {
+      axios.get(`http://localhost:3002/showProductsUser/${idUser}`)
+        .then((response) => {
+          console.log(response)
+          setPorducts(response.data)
+          if(productAdd){
+            setProductAdd(false)
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
+
+  }, [idUser, setProductAdd, productAdd])
+
+
+
+  async function handleDeleteProduct(products_id){
+   await deleteProduct(products_id)
+   setProductAdd(true);
+  }
+
+
 
   return (
     <Container>
@@ -30,21 +59,20 @@ function ProfileUser() {
         </Col>
       </Row>
 
-      <Col>
-        <Button variant='warning'>Publicar producto</Button>
+      <Link className='addProductBtn' to={`/addProduct/${idUser}`}>Publicar producto</Link>
+    {
+      products.map((products) => (
+        <Col key={products.id}>
         <div className='myProducts'>
-          <img src={picture} width={120} alt="flores" />
-          <Button variant='primary'>Ver Producto</Button>
-          <Button variant='warning'>Editar Producto</Button>
-          <Button variant='danger'>Deletar producto</Button>
-        </div>
-        <div className='myProducts'>
-          <img src={picture} width={120} alt="flores" />
-          <Button variant='primary'>Ver Producto</Button>
-          <Button variant='warning'>Editar Producto</Button>
-          <Button variant='danger'>Deletar producto</Button>
+          <img src={`http://localhost:3002/${products.photo}`} width={120} alt="flores" />
+          <Link to={`/details/${products.id}`} className='addProductBtn'>Ver producto</Link>
+          <Link to={`/editProduct/${products.id}`} className='addProductBtnEdit'>Editar Producto</Link>
+          <Button variant='danger' onClick={() => handleDeleteProduct(products.id)}>Deletar producto</Button>
         </div>
       </Col>
+      ))
+    }
+      
 
     </Container>
   )

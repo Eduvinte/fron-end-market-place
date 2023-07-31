@@ -8,22 +8,25 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContextApp } from '../contexts/AuthContextApp';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
+  const navigate = useNavigate()
   const { setRegisterGlobal } = useContext(AuthContextApp)
 
-const [nameRegister, setName] = useState('')
-const [emailRegister, setEmail] = useState('')
-const [passwordRegister, setPassword] = useState('')
-
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
 function handleRegister(e){
   e.preventDefault();
 
   axios
-    .post('/register', { nameRegister, emailRegister, passwordRegister })
+    .post('http://localhost:3002/register', { name, email, password })
     .then((response) => {
       // Passar a resposta do servidor ao contexto
+      console.log("Registro existoso")
+      navigate('/login')
     })
     .catch((error)=>{
       console.error('Erro ao registrar', error)
@@ -38,28 +41,28 @@ function handleRegister(e){
           <Col className='columnRegister'>
     
             <InputEmail
-              placeholder='Insira su name'
-              value = {nameRegister}
+              placeholder='Digite su nombre'
+              value = {name}
               type= 'texto'
               onChange={(e) => setName(e.target.value)}
             />
           
             <InputEmail
-              placeholder='Insira su email'
-              value = {emailRegister}
+              placeholder='Digite su email'
+              value = {email}
               type= 'texto'
               onChange={(e) => setEmail(e.target.value)}
             />
           
             <InputEmail
-              placeholder='Insira su password'
-              value = {passwordRegister}
-              type= 'texto'
+              placeholder='Digite su contraseña'
+              value = {password}
+              type= 'password'
               onChange={(e) => setPassword(e.target.value)}
             />
           
             <ButtonComponent
-              value={'Enviar mensaje'}
+              value={'Registrar'}
             />
             <span>Ya tienes una cuenta ? <Link to='/login'>Login</Link></span>
           </Col>
