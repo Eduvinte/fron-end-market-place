@@ -11,7 +11,7 @@ function DetailsProduct() {
   const [product, setProduct] = useState([])
 
   axios
-    .get(`https://back-end-market-place-production.up.railway.app/${product_id}`)
+    .get(`https://back-end-market-place-production.up.railway.app/productsDetails/${product_id}`)
     .then((response) => {
       setProduct(response.data)
     })
