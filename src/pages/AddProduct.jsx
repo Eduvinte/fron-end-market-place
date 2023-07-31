@@ -55,7 +55,7 @@ function AddProduct() {
 
         }
 
-      await axios.post(`http://localhost:3002/addProduct/${idUser}`, formData, { headers })
+      await axios.post(`https://back-end-market-place-production.up.railway.app/addProduct/${idUser}`, formData, { headers })
         if(idUser){
           navigate(`/profile/${idUser}`)
           setProductAdd(true)
