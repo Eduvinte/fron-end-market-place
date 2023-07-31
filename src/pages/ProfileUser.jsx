@@ -21,7 +21,7 @@ function ProfileUser() {
   useEffect(()=>{
 
     if (idUser) {
-      axios.get(`http://localhost:3002/showProductsUser/${idUser}`)
+      axios.get(`https://back-end-market-place-production.up.railway.app/${idUser}`)
         .then((response) => {
           console.log(response)
           setPorducts(response.data)

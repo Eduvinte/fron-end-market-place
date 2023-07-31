@@ -48,7 +48,7 @@ function Home() {
             {
               products.map((products_home) => (
                 <Col className='container1' key={products_home.id} xs={6} sm={6} md={3}>
-                <img src={`http://localhost:3002/${products_home.photo}`} alt={products_home.name} width={140} height={200}  />
+                <img src={`https://back-end-market-place-production.up.railway.app/${products_home.photo}`} alt={products_home.name} width={140} height={200}  />
                 <ButtonFavorit product={products_home} />
                 <h3>{products_home.name}</h3>
                 <p>{products_home.description}</p>

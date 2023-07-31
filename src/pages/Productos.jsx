@@ -25,7 +25,7 @@ function Productos() {
       minPrice,
       maxPrice
     }
-    axios.post('http://localhost:3002/productsFilter', data)
+    axios.post('https://back-end-market-place-production.up.railway.app/productsFilter', data)
       .then((response) => {
         setData(response.data)
         console.log(response.data)
@@ -106,7 +106,7 @@ function Productos() {
             ) : (
               data.map((product) => (
                 <Col className='product' key={product.id}>
-                  <img src={`http://localhost:3002/${product.photo}`} alt="" width={200} height={200} />
+                  <img src={`https://back-end-market-place-production.up.railway.app/${product.photo}`} alt="" width={200} height={200} />
                   <ButtonFavorit product={product} />
                   <Link to={`/details/${product.id}`} className='addProductBtn'>Ver producto</Link>
                 </Col>

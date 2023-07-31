@@ -26,7 +26,7 @@ function DetailsProduct() {
           product.map((product) => (
             <>
               <Col key={product.id}>
-                <img src={`http://localhost:3002/${product.photo}`} alt="logo" />
+                <img src={`https://back-end-market-place-production.up.railway.app/${product.photo}`} alt="logo" />
               </Col>
               <Col>
                 <h1>{product.name}</h1><br />
