@@ -26,7 +26,7 @@ function Login() {
   async function handleLogin(e) {
     e.preventDefault();
     axios
-      .post('http://localhost:3002/login', { email, password })
+      .post('https://back-end-market-place-production.up.railway.app/login', { email, password })
       .then((response) => {
         // Passar o token pro contexto
         if (response) {

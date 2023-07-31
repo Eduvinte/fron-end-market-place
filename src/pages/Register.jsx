@@ -22,7 +22,7 @@ function handleRegister(e){
   e.preventDefault();
 
   axios
-    .post('http://localhost:3002/register', { name, email, password })
+    .post('https://back-end-market-place-production.up.railway.app/register', { name, email, password })
     .then((response) => {
       // Passar a resposta do servidor ao contexto
       console.log("Registro existoso")

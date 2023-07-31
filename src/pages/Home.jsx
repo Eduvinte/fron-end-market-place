@@ -13,7 +13,7 @@ function Home() {
 
   useEffect(() => {
     axios
-    .get('http://localhost:3002/showProducts')
+    .get('https://back-end-market-place-production.up.railway.app/showProducts')
     .then((response) => {
       setProducts(response.data)
     })

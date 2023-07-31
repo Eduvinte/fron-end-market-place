@@ -64,7 +64,7 @@ function ProfileUser() {
       products.map((products) => (
         <Col key={products.id}>
         <div className='myProducts'>
-          <img src={`http://localhost:3002/${products.photo}`} width={120} alt="flores" />
+          <img src={`https://back-end-market-place-production.up.railway.app/${products.photo}`} width={120} alt="flores" />
           <Link to={`/details/${products.id}`} className='addProductBtn'>Ver producto</Link>
           <Link to={`/editProduct/${products.id}`} className='addProductBtnEdit'>Editar Producto</Link>
           <Button variant='danger' onClick={() => handleDeleteProduct(products.id)}>Deletar producto</Button>

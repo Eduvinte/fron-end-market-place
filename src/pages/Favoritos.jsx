@@ -54,7 +54,7 @@ function Favoritos() {
           productsFavorit.map((products) => (
             <Col className='containerProductos' key={products.id}>
             <Col className='product'>
-              <img src={`http://localhost:3002/${products.photo}`} width={200} height={200} alt={products.name} />
+              <img src={`https://back-end-market-place-production.up.railway.app/${products.photo}`} width={200} height={200} alt={products.name} />
               <h1>{products.name}</h1>
               <p>{products.description}</p>
               <Button variant='danger' onClick={() => handleDelete(products.id)}>Quitar favorito</Button>

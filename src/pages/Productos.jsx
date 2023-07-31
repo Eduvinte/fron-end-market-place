@@ -39,7 +39,7 @@ function Productos() {
       minPrice,
       maxPrice
     }
-    await axios.post('http://localhost:3002/productsFilter', data)
+    await axios.post('https://back-end-market-place-production.up.railway.app/productsFilter', data)
       .then((response) => {
         setData(response.data)
         console.log(response.data)

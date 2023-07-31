@@ -39,7 +39,7 @@ function EditProduct() {
       }
 
       await axios
-      .put(`http://localhost:3002/editProducts/${id_product}`, formData, { header })
+      .put(`https://back-end-market-place-production.up.railway.app/${id_product}`, formData, { header })
 
       alert('Producto editado con exíto')
     } catch (error) {
